@@ -73,4 +73,9 @@
 {
     return [UIImage imageNamed:card.isChosen ? @"cardfront" : @"cardback"];
 }
+- (IBAction)resetButton:(UIButton *)sender {
+    _game = [[CardMatchingGame alloc] initWithCardCount:[self.cardButtons count]
+                                      usingDeck:[self createDeck]];
+    [self updateUI];
+}
 @end
