@@ -9,10 +9,17 @@
 #import "CareGameViewController.h"
 
 @interface CareGameViewController ()
-
+@property (weak, nonatomic) IBOutlet UILabel *FlipLabel;
+@property (nonatomic) int flipCount;
 @end
 
 @implementation CareGameViewController
+
+-(void)setFlipCount:(int)flipCount
+{
+    _flipCount = flipCount;
+    self.FlipLabel.text = [NSString stringWithFormat:@"FlipCount: %d",flipCount];
+}
 
 - (void)viewDidLoad
 {
@@ -34,6 +41,7 @@
         [sender setBackgroundImage:[UIImage imageNamed:@"cardfront"] forState:UIControlStateNormal];
         [sender setTitle:@"1♠︎" forState:UIControlStateNormal];
     }
+    self.flipCount++;
 }
 
 @end
