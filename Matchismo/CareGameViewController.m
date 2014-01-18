@@ -7,6 +7,7 @@
 //
 
 #import "CareGameViewController.h"
+#import "PlayingCardDeck.h"
 
 @interface CareGameViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *FlipLabel;
@@ -38,8 +39,9 @@
         [sender setBackgroundImage:[UIImage imageNamed:@"cardback"] forState:UIControlStateNormal];
         [sender setTitle:@"" forState:UIControlStateNormal];
     }else{
+        Card *card = [[[PlayingCardDeck alloc] init] drawRandomCard];
         [sender setBackgroundImage:[UIImage imageNamed:@"cardfront"] forState:UIControlStateNormal];
-        [sender setTitle:@"1♠︎" forState:UIControlStateNormal];
+        [sender setTitle:[NSString stringWithFormat:@"%@",card.content] forState:UIControlStateNormal];
     }
     self.flipCount++;
 }
