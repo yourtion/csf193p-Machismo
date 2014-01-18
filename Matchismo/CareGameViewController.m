@@ -26,4 +26,9 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (IBAction)CardBtn:(UIButton *)sender {
+    [sender setBackgroundImage:[UIImage imageNamed:@"cardback"] forState:UIControlStateNormal];
+    [sender setTitle:@"" forState:UIControlStateNormal];
+}
+
 @end
