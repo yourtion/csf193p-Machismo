@@ -24,7 +24,6 @@
 -(Deck *)createDeck
 {
     return [[PlayingCardDeck alloc] init];
-    NSLog(@"createDeck");
 }
 
 -(void)setFlipCount:(int)flipCount
@@ -49,12 +48,15 @@
     if ([sender.currentTitle length]) {
         [sender setBackgroundImage:[UIImage imageNamed:@"cardback"] forState:UIControlStateNormal];
         [sender setTitle:@"" forState:UIControlStateNormal];
+        self.flipCount++;
     }else{
         Card *card = [self.deck drawRandomCard];
-        [sender setBackgroundImage:[UIImage imageNamed:@"cardfront"] forState:UIControlStateNormal];
-        [sender setTitle:card.content forState:UIControlStateNormal];
+        if (card) {
+            [sender setBackgroundImage:[UIImage imageNamed:@"cardfront"] forState:UIControlStateNormal];
+            [sender setTitle:card.content forState:UIControlStateNormal];
+            self.flipCount++;
+        }
     }
-    self.flipCount++;
 }
 
 @end
