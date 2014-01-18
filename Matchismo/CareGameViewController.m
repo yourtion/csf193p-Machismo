@@ -12,9 +12,20 @@
 @interface CareGameViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *FlipLabel;
 @property (nonatomic) int flipCount;
+@property (strong, nonatomic) Deck *deck;
 @end
 
 @implementation CareGameViewController
+-(Deck *)deck
+{
+    if (!_deck) _deck = [self createDeck];
+    return _deck;
+}
+-(Deck *)createDeck
+{
+    return [[PlayingCardDeck alloc] init];
+    NSLog(@"createDeck");
+}
 
 -(void)setFlipCount:(int)flipCount
 {
@@ -39,9 +50,9 @@
         [sender setBackgroundImage:[UIImage imageNamed:@"cardback"] forState:UIControlStateNormal];
         [sender setTitle:@"" forState:UIControlStateNormal];
     }else{
-        Card *card = [[[PlayingCardDeck alloc] init] drawRandomCard];
+        Card *card = [self.deck drawRandomCard];
         [sender setBackgroundImage:[UIImage imageNamed:@"cardfront"] forState:UIControlStateNormal];
-        [sender setTitle:[NSString stringWithFormat:@"%@",card.content] forState:UIControlStateNormal];
+        [sender setTitle:card.content forState:UIControlStateNormal];
     }
     self.flipCount++;
 }
