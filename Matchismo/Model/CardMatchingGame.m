@@ -10,6 +10,7 @@
 
 @interface CardMatchingGame()
 @property (nonatomic, readwrite)NSInteger score;
+@property (nonatomic, readwrite)NSString *result;
 @property (nonatomic, strong)NSMutableArray *cards;
 @end
 
@@ -49,6 +50,7 @@ static const int COST_TO_CHOOSE = 1;
 -(void)chooseCardAtIndex:(NSUInteger)index
 {
     Card *card = [self cardAtIndex:index];
+    self.result = @"";
     if (!card.isMatched) {
         if (card.isChosen) {
             card.chosen = NO;
@@ -60,10 +62,11 @@ static const int COST_TO_CHOOSE = 1;
                         self.score += matchScore * MATCH_BONUS;
                         otherCard.matched = YES;
                         card.matched = YES;
-                        
+                        self.result = [NSString stringWithFormat:@"Matched %@ %@ for %d score!", card.content, otherCard.content, matchScore * MATCH_BONUS];
                     }else{
                         self.score -= MISMATCH_PENALTY;
                         otherCard.chosen = NO;
+                        self.result = [NSString stringWithFormat:@"%@ %@ don't match! %d point penalty!",card.content, otherCard.content, MISMATCH_PENALTY];
                     }
                     break;
                 }
